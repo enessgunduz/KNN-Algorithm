@@ -125,6 +125,15 @@ if __name__ == "__main__":
     # Set up logging
     logging.basicConfig(filename="classification_log.txt", level=logging.INFO)
 
+    # Get user input for k and distance metric
+    k = int(input("Enter the number of nearest neighbors (k): "))
+    metric = input("Choose the distance metric (euclidean/manhattan): ").strip().lower()
+
+    # Ensure valid metric input
+    while metric not in ["euclidean", "manhattan"]:
+        print("Invalid input! Please choose either 'euclidean' or 'manhattan'.")
+        metric = input("Choose the distance metric (euclidean/manhattan): ").strip().lower()
+
     train_data = load_train_data()
     test_data = load_test_data()
     encoded_train_data = encode_df(train_data)
