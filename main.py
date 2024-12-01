@@ -104,20 +104,43 @@ class KNearestNeighbors:
         return prediction
 
     def evaluate(self, data, log_file):
+        # Confusion Matrix initialization
+        tp = fp = tn = fn = 0
         correct = 0
         predictions = []
+
         for i in range(len(data)):
             test_instance = data.iloc[i].drop("PlayTennis")
             actual = data.iloc[i]["PlayTennis"]
             predicted = self.predict(test_instance)
             predictions.append((actual, predicted))
+
             if actual == predicted:
                 correct += 1
+                if actual == "Yes":
+                    tp += 1  # True Positive
+                else:
+                    tn += 1  # True Negative
+            else:
+                if actual == "Yes":
+                    fn += 1  # False Negative
+                else:
+                    fp += 1  # False Positive
 
             # Log the actual and predicted values
             log_file.write(f"Actual: {actual}, Predicted: {predicted}\n")
 
         accuracy = correct / len(data)
+
+        # Confusion Matrix Output
+        log_file.write(f"\nConfusion Matrix:\n")
+        log_file.write(f"True Positives (TP): {tp}\n")
+        log_file.write(f"False Positives (FP): {fp}\n")
+        log_file.write(f"True Negatives (TN): {tn}\n")
+        log_file.write(f"False Negatives (FN): {fn}\n")
+        log_file.write("------------------------\n")
+
+
         return accuracy, predictions
 
 
@@ -139,7 +162,7 @@ if __name__ == "__main__":
     encoded_train_data = encode_df(train_data)
     encoded_test_data = encode_df(test_data)
 
-    knn = KNearestNeighbors(k=3, metric="euclidean")
+    knn = KNearestNeighbors(k=k, metric=metric)
 
     # Train the model
     knn.train(encoded_train_data)

@@ -3,8 +3,22 @@ Actual: Yes, Predicted: Yes
 Actual: No, Predicted: Yes
 Actual: No, Predicted: No
 Actual: Yes, Predicted: Yes
+
+Confusion Matrix:
+True Positives (TP): 3
+False Positives (FP): 1
+True Negatives (TN): 1
+False Negatives (FN): 0
+------------------------
 Actual: Yes, Predicted: Yes
 Actual: Yes, Predicted: Yes
 Actual: No, Predicted: Yes
-Actual: No, Predicted: No
+Actual: No, Predicted: Yes
 Actual: Yes, Predicted: Yes
+
+Confusion Matrix:
+True Positives (TP): 3
+False Positives (FP): 2
+True Negatives (TN): 0
+False Negatives (FN): 0
+------------------------
